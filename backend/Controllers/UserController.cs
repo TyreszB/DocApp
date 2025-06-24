@@ -62,12 +62,7 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-    [HttpGet("by-role/{role}")]
-    public ActionResult<IEnumerable<User>> GetByRole(UserRole role)
-    {
-        var users = _users.Where(u => u.Position == role);
-        return Ok(users);
-    }
+ 
 
     [HttpGet("active")]
     public ActionResult<IEnumerable<User>> GetActiveUsers()
