@@ -28,6 +28,12 @@
             "projectReferences": {
               "/Users/tyreszdev/IdeaProjects/DocApp/Application/Application.csproj": {
                 "projectPath": "/Users/tyreszdev/IdeaProjects/DocApp/Application/Application.csproj"
+              },
+              "/Users/tyreszdev/IdeaProjects/DocApp/Domain/Domain.csproj": {
+                "projectPath": "/Users/tyreszdev/IdeaProjects/DocApp/Domain/Domain.csproj"
+              },
+              "/Users/tyreszdev/IdeaProjects/DocApp/Persistence/Persistence.csproj": {
+                "projectPath": "/Users/tyreszdev/IdeaProjects/DocApp/Persistence/Persistence.csproj"
               }
             }
           }
@@ -104,9 +110,6 @@
             "projectReferences": {
               "/Users/tyreszdev/IdeaProjects/DocApp/Domain/Domain.csproj": {
                 "projectPath": "/Users/tyreszdev/IdeaProjects/DocApp/Domain/Domain.csproj"
-              },
-              "/Users/tyreszdev/IdeaProjects/DocApp/Persistence/Persistence.csproj": {
-                "projectPath": "/Users/tyreszdev/IdeaProjects/DocApp/Persistence/Persistence.csproj"
               }
             }
           }

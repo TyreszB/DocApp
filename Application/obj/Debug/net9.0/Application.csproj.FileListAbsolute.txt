@@ -2,9 +2,7 @@
 /Users/tyreszdev/IdeaProjects/DocApp/Application/bin/Debug/net9.0/Application.dll
 /Users/tyreszdev/IdeaProjects/DocApp/Application/bin/Debug/net9.0/Application.pdb
 /Users/tyreszdev/IdeaProjects/DocApp/Application/bin/Debug/net9.0/Domain.dll
-/Users/tyreszdev/IdeaProjects/DocApp/Application/bin/Debug/net9.0/Persistence.dll
 /Users/tyreszdev/IdeaProjects/DocApp/Application/bin/Debug/net9.0/Domain.pdb
-/Users/tyreszdev/IdeaProjects/DocApp/Application/bin/Debug/net9.0/Persistence.pdb
 /Users/tyreszdev/IdeaProjects/DocApp/Application/obj/Debug/net9.0/Application.csproj.AssemblyReference.cache
 /Users/tyreszdev/IdeaProjects/DocApp/Application/obj/Debug/net9.0/Application.GeneratedMSBuildEditorConfig.editorconfig
 /Users/tyreszdev/IdeaProjects/DocApp/Application/obj/Debug/net9.0/Application.AssemblyInfoInputs.cache
