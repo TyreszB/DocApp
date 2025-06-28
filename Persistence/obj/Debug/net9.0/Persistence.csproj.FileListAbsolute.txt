@@ -1,0 +1,16 @@
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/bin/Debug/net9.0/Persistence.deps.json
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/bin/Debug/net9.0/Persistence.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/bin/Debug/net9.0/Persistence.pdb
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/bin/Debug/net9.0/Domain.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/bin/Debug/net9.0/Domain.pdb
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persistence.csproj.AssemblyReference.cache
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persistence.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persistence.AssemblyInfoInputs.cache
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persistence.AssemblyInfo.cs
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persistence.csproj.CoreCompileInputs.cache
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persistence.sourcelink.json
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persiste.61C28332.Up2Date
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persistence.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/refint/Persistence.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/Persistence.pdb
+/Users/tyreszdev/IdeaProjects/DocApp/Persistence/obj/Debug/net9.0/ref/Persistence.dll

@@ -1,0 +1,12 @@
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/bin/Debug/net9.0/Domain.deps.json
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/bin/Debug/net9.0/Domain.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/bin/Debug/net9.0/Domain.pdb
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.AssemblyInfoInputs.cache
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.AssemblyInfo.cs
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.csproj.CoreCompileInputs.cache
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.sourcelink.json
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/refint/Domain.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.pdb
+/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/ref/Domain.dll
