@@ -15,4 +15,13 @@ public class UsersController(AppDbContext context) : BaseAPIController
     {
         return await context.Users.ToListAsync();
     }
+
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<User>> GetUserDetails(string id)
+    {
+        var user = await context.Users.FindAsync(id);
+        if (user == null) return NotFound();
+        return user;
+    }
 }
