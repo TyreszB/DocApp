@@ -8,7 +8,7 @@ using Application.Users.Queries;
 namespace API.Controllers;
 
 
-public class UsersController(AppDbContext context, IMediator mediator) : BaseAPIController
+public class UsersController(IMediator mediator) : BaseAPIController
 {
 
 
@@ -22,8 +22,6 @@ public class UsersController(AppDbContext context, IMediator mediator) : BaseAPI
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUserDetails(string id)
     {
-        var user = await context.Users.FindAsync(id);
-        if (user == null) return NotFound();
-        return user;
+        return await mediator.Send(new GetUserDetail.Query { Id = id });
     }
 }

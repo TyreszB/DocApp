@@ -14,3 +14,5 @@
 /Users/tyreszdev/IdeaProjects/DocApp/Application/obj/Debug/net9.0/refint/Application.dll
 /Users/tyreszdev/IdeaProjects/DocApp/Application/obj/Debug/net9.0/Application.pdb
 /Users/tyreszdev/IdeaProjects/DocApp/Application/obj/Debug/net9.0/ref/Application.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Application/bin/Debug/net9.0/Persistence.dll
+/Users/tyreszdev/IdeaProjects/DocApp/Application/bin/Debug/net9.0/Persistence.pdb
