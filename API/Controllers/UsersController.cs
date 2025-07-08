@@ -2,18 +2,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Domain;
+using MediatR;
+using Application.Users.Queries;
 
 namespace API.Controllers;
 
 
-public class UsersController(AppDbContext context) : BaseAPIController
+public class UsersController(AppDbContext context, IMediator mediator) : BaseAPIController
 {
 
 
     [HttpGet]
     public async Task<ActionResult<List<User>>> GetUsers()
     {
-        return await context.Users.ToListAsync();
+        return await mediator.Send(new GetUserList.Query());
     }
 
 

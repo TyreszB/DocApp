@@ -1,3 +1,5 @@
+
+using Application.Users.Queries;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetUserList.Handler>());
 builder.Services.AddCors();
 
 
