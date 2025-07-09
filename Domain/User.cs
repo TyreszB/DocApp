@@ -8,7 +8,7 @@ public class User
     public required string Name { get; set; }
     public required string Email { get; set; }
     public required string Password { get; set; }
-    public required UserRole Role { get; set; }
+    public required string Role { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public bool IsEmailVerified { get; set; } = false;
@@ -20,14 +20,4 @@ public class User
    
 }
 
-public enum UserRole
-{
-    Admin,
-    User,
-    Technician,
-    QualityControl,
-    AircraftSupervisor,
-    Pilot,  
-    TechnicalWriter,
 
-}

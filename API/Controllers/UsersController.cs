@@ -4,24 +4,38 @@ using Persistence;
 using Domain;
 using MediatR;
 using Application.Users.Queries;
+using Application.Users.Commands;
 
 namespace API.Controllers;
 
 
-public class UsersController(IMediator mediator) : BaseAPIController
+public class UsersController: BaseAPIController
 {
 
 
     [HttpGet]
     public async Task<ActionResult<List<User>>> GetUsers()
     {
-        return await mediator.Send(new GetUserList.Query());
+        return await Mediator.Send(new GetUserList.Query());
     }
 
 
     [HttpGet("{id}")]
     public async Task<ActionResult<User>> GetUserDetails(string id)
     {
-        return await mediator.Send(new GetUserDetail.Query { Id = id });
+        return await Mediator.Send(new GetUserDetail.Query { Id = id });
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<string>> CreateUser(User user)
+    {
+        return await Mediator.Send(new CreateUser.Command { User = user });
+    }
+
+    [HttpPut]
+    public async Task<ActionResult> EditUser(User user)
+    {
+        await Mediator.Send(new EditUser.Command { User = user });
+        return Ok();
     }
 }

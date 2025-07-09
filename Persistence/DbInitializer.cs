@@ -16,7 +16,7 @@ public class DbInitializer
                 Name = "Bob",
                 Email = "bob@test.com",
                 Password = "password",
-                Role = UserRole.Admin,
+                Role = "Admin",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 IsEmailVerified = true,
