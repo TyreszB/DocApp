@@ -38,4 +38,11 @@ public class UsersController: BaseAPIController
         await Mediator.Send(new EditUser.Command { User = user });
         return Ok();
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteUser(string id)
+    {
+        await Mediator.Send(new DeleteUser.Command { Id = id });
+        return Ok();
+    }
 }
