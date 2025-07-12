@@ -9,6 +9,8 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<User, User>();
+        CreateMap<Aircraft, Aircraft>();
+        CreateMap<Discrepency, Discrepency>();
     }
 
 }
