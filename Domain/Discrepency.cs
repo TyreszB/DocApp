@@ -15,6 +15,7 @@ public class Discrepency
     public required string DiscrepencyStatus { get; set; }
 
     public required string DiscrepencyPriority { get; set; }
+    public required string DocumentUrl { get; set; }
 
     
 

@@ -11,7 +11,9 @@ public class Aircraft
 
     public required string AircraftStatus { get; set; }
 
-    public required string AircraftLocation { get; set; }   
+    public required string AircraftLocation { get; set; }
+    
+       
 
     public required Discrepency[] Discrepencies { get; set; }
 
