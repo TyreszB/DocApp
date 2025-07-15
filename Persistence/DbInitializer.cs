@@ -1,22 +1,31 @@
 using System;
-using Microsoft.VisualBasic;
+using Microsoft.AspNetCore.Identity;
 using Domain;
 
 namespace Persistence;
 
 public class DbInitializer
 {
-    public static async Task SeedData(AppDbContext context)
+    public static async Task SeedData(AppDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
     {
-        if(context.Users.Any()) return;
+        // Create roles if they don't exist
+        var roles = new[] { "Admin", "User", "Manager" };
+        foreach (var role in roles)
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
+        }
 
-        var users = new List<User>
-        {   
-            new() {
-                Name = "Bob",
-                Email = "bob@test.com",
-                Password = "password",
-                Role = "Admin",
+        // Create admin user if no users exist
+        if (!userManager.Users.Any())
+        {
+            var adminUser = new User
+            {
+                UserName = "admin",
+                Email = "admin@test.com",
+                EmailConfirmed = true,
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 IsEmailVerified = true,
@@ -25,10 +34,13 @@ public class DbInitializer
                 IsArchived = false,
                 IsLocked = false,
                 IsVerified = true,
-            }
-        };
+            };
 
-         context.Users.AddRange(users);
-         await context.SaveChangesAsync();
+            var result = await userManager.CreateAsync(adminUser, "Admin123!");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(adminUser, "Admin");
+            }
+        }
     }
 }
