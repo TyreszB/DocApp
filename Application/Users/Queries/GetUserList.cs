@@ -15,7 +15,8 @@ public class GetUserList
     {
         public async Task<List<User>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return await context.Users.ToListAsync(cancellationToken);
+            return await context.Users.ToListAsync(cancellationToken)
+                ?? throw new Exception("Users not found");
         }
     }
 }
