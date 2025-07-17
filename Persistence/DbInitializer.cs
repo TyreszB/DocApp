@@ -1,31 +1,22 @@
 using System;
-using Microsoft.AspNetCore.Identity;
 using Domain;
 
 namespace Persistence;
 
 public class DbInitializer
 {
-    public static async Task SeedData(AppDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+    public static async Task SeedData(AppDbContext context)
     {
-        // Create roles if they don't exist
-        var roles = new[] { "Admin", "User", "Manager" };
-        foreach (var role in roles)
-        {
-            if (!await roleManager.RoleExistsAsync(role))
-            {
-                await roleManager.CreateAsync(new IdentityRole(role));
-            }
-        }
+        if(context.Users.Any()) return;
 
-        // Create admin user if no users exist
-        if (!userManager.Users.Any())
+        var users = new List<User>
         {
-            var adminUser = new User
+            new User
             {
-                UserName = "admin",
-                Email = "admin@test.com",
-                EmailConfirmed = true,
+                Name = "Bob",
+                Email = "bob@test.com",
+                Password = "password",
+                Role = "Admin",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 IsEmailVerified = true,
@@ -34,13 +25,64 @@ public class DbInitializer
                 IsArchived = false,
                 IsLocked = false,
                 IsVerified = true,
-            };
-
-            var result = await userManager.CreateAsync(adminUser, "Admin123!");
-            if (result.Succeeded)
-            {
-                await userManager.AddToRoleAsync(adminUser, "Admin");
             }
-        }
+        };
+
+        context.Users.AddRange(users);
+        await context.SaveChangesAsync();
+
+        // Seed Aircrafts
+        if (context.Aircrafts.Any()) return;
+
+        var aircrafts = new List<Aircraft>
+        {
+            new Aircraft
+            {
+                SerialNumber = "1234567891",
+                Model = "Model 1",
+                AircraftStatus = "Status 1",
+                AircraftLocation = "Location 1",
+                Discrepencies = [],
+            },
+            new Aircraft
+            {
+                SerialNumber = "1234567890",
+                Model = "Model 2",
+                AircraftStatus = "Status 2",
+                AircraftLocation = "Location 2",
+                Discrepencies = []
+            }
+        };
+        context.Aircrafts.AddRange(aircrafts);
+        await context.SaveChangesAsync();
+        
+
+        // Seed Discrepencies
+        if (context.Discrepencies.Any()) return;
+        
+        var discrepancies = new List<Discrepency>
+        {
+            new Discrepency
+            {
+                Aircraft = null, // You can assign an aircraft if needed
+                DiscrepencyType = "Type 1",
+                DiscrepencyDescription = "Description 1",
+                DiscrepencyStatus = "Status 1",
+                DiscrepencyPriority = "Priority 1",
+                DocumentUrl = "DocumentUrl 1"                
+            },
+            new Discrepency
+            {
+                Aircraft = null, // You can assign an aircraft if needed
+                DiscrepencyType = "Type 2",
+                DiscrepencyDescription = "Description 2",
+                DiscrepencyStatus = "Status 2",
+                DiscrepencyPriority = "Priority 2",
+                DocumentUrl = "DocumentUrl 2"
+            }
+        };
+        context.Discrepencies.AddRange(discrepancies);
+        await context.SaveChangesAsync();
+        
     }
-}
+} 

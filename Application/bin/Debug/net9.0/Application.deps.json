@@ -496,9 +496,6 @@
       "System.Memory/4.5.3": {},
       "System.Text.Json/9.0.2": {},
       "Domain/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.7"
-        },
         "runtime": {
           "Domain.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -509,7 +506,6 @@
       "Persistence/1.0.0": {
         "dependencies": {
           "Domain": "1.0.0",
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.7",
           "Microsoft.EntityFrameworkCore.Sqlite": "9.0.2"
         },
         "runtime": {

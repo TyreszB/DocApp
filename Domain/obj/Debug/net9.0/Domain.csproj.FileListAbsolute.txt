@@ -10,4 +10,3 @@
 /Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/refint/Domain.dll
 /Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.pdb
 /Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/ref/Domain.dll
-/Users/tyreszdev/IdeaProjects/DocApp/Domain/obj/Debug/net9.0/Domain.csproj.AssemblyReference.cache

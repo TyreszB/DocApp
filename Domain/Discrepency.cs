@@ -7,7 +7,7 @@ public class Discrepency
 
     public string Id { get; set; } = Guid.NewGuid().ToString();
 
-    public required Aircraft Aircraft { get; set; }
+    public Aircraft? Aircraft { get; set; } = null;
 
     public required string DiscrepencyType { get; set; }
     public required string DiscrepencyDescription { get; set; }

@@ -167,12 +167,9 @@
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.IdentityModel.Tokens.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/AutoMapper.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-/Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.AspNetCore.Cryptography.Internal.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.Extensions.Identity.Core.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.Extensions.Identity.Stores.dll
-/Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
-/Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/System.IdentityModel.Tokens.Jwt.dll

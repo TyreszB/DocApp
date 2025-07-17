@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mDCkGI9QfjE=",
+  "dgSpecHash": "ZmfrEAyov3Y=",
   "success": true,
   "projectFilePath": "/Users/tyreszdev/IdeaProjects/DocApp/API/API.csproj",
   "expectedPackageFiles": [
@@ -9,7 +9,6 @@
     "/Users/tyreszdev/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/mediatr/13.0.0/mediatr.13.0.0.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
-    "/Users/tyreszdev/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/9.0.7/microsoft.aspnetcore.authentication.jwtbearer.9.0.7.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/microsoft.aspnetcore.cryptography.internal/9.0.7/microsoft.aspnetcore.cryptography.internal.9.0.7.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/9.0.7/microsoft.aspnetcore.cryptography.keyderivation.9.0.7.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/9.0.7/microsoft.aspnetcore.identity.entityframeworkcore.9.0.7.nupkg.sha512",
@@ -46,8 +45,6 @@
     "/Users/tyreszdev/.nuget/packages/microsoft.identitymodel.abstractions/8.3.0/microsoft.identitymodel.abstractions.8.3.0.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.3.0/microsoft.identitymodel.jsonwebtokens.8.3.0.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/microsoft.identitymodel.logging/8.3.0/microsoft.identitymodel.logging.8.3.0.nupkg.sha512",
-    "/Users/tyreszdev/.nuget/packages/microsoft.identitymodel.protocols/8.0.1/microsoft.identitymodel.protocols.8.0.1.nupkg.sha512",
-    "/Users/tyreszdev/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/8.0.1/microsoft.identitymodel.protocols.openidconnect.8.0.1.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/microsoft.identitymodel.tokens/8.3.0/microsoft.identitymodel.tokens.8.3.0.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512",
     "/Users/tyreszdev/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",

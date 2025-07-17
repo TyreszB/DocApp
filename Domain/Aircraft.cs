@@ -15,7 +15,7 @@ public class Aircraft
     
        
 
-    public required Discrepency[] Discrepencies { get; set; }
+    public Discrepency[]? Discrepencies { get; set; } = [];
 
 
 
