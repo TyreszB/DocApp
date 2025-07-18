@@ -18,28 +18,24 @@ public class AuthController : ControllerBase
     {
         this.context = context;
     }
+    
     [HttpPost("register")]
-    public ActionResult<User> Register(UserDto request)
+    public async Task<ActionResult<User>> Register(UserDto request)
     {
-
         var user = new User
         {
             Name = request.Name,
             Email = request.Email,
             Password = request.Password,
-            PasswordHash = request.Password,
-            Role = "User",
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow,
-            IsEmailVerified = false,
-            IsPhoneVerified = false,
-            IsActive = true,
-            IsArchived = false,
+            PasswordHash = string.Empty,
+            Role = "User"
         };
 
         var passwordHash = new PasswordHasher<User>().HashPassword(user, request.Password);
+        user.PasswordHash = passwordHash;
 
-        user.Password = passwordHash;
+        context.Users.Add(user);
+        await context.SaveChangesAsync();
 
         return Ok(user);        
     }
@@ -54,7 +50,16 @@ public class AuthController : ControllerBase
             return BadRequest("User not found");
         }
 
-        if(new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
+        var passwordHasher = new PasswordHasher<User>();
+        var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
+        
+        // Debug output
+        Console.WriteLine($"User found: {user.Email}");
+        Console.WriteLine($"Stored PasswordHash: {user.PasswordHash}");
+        Console.WriteLine($"Attempting to verify password: {request.Password}");
+        Console.WriteLine($"Verification result: {result}");
+        
+        if(result == PasswordVerificationResult.Failed)
         {
             return BadRequest("Invalid password");
         }
@@ -63,8 +68,5 @@ public class AuthController : ControllerBase
             var token = "success";
             return Ok(token);
         }
-        
     }
-
- 
 }
