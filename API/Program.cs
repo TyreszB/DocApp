@@ -3,12 +3,19 @@ using Application.Users.Queries;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Application.Core;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -19,7 +26,13 @@ builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetUse
 builder.Services.AddCors();
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);   
 
+builder.Services.AddOpenApi();
+
 var app = builder.Build();
+
+if(app.Environment.IsDevelopment()){
+    app.MapOpenApi();
+}
 
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000", "https://localhost:3000"));
 
