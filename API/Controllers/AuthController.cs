@@ -53,11 +53,6 @@ public class AuthController : ControllerBase
         var passwordHasher = new PasswordHasher<User>();
         var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
         
-        // Debug output
-        Console.WriteLine($"User found: {user.Email}");
-        Console.WriteLine($"Stored PasswordHash: {user.PasswordHash}");
-        Console.WriteLine($"Attempting to verify password: {request.Password}");
-        Console.WriteLine($"Verification result: {result}");
         
         if(result == PasswordVerificationResult.Failed)
         {
