@@ -3,20 +3,23 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Persistence;
-
-
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.EntityFrameworkCore;    
 
 namespace API.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class AuthController : ControllerBase
+public class AuthController : BaseAPIController
 {
     private readonly AppDbContext context;
+    private readonly IConfiguration configuration;
 
-    public AuthController(AppDbContext context)
+    public AuthController(AppDbContext context, IConfiguration configuration)
     {
         this.context = context;
+        this.configuration = configuration;
     }
     
     [HttpPost("register")]
@@ -53,6 +56,11 @@ public class AuthController : ControllerBase
         var passwordHasher = new PasswordHasher<User>();
         var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
         
+        // Debug output
+        Console.WriteLine($"User found: {user.Email}");
+        Console.WriteLine($"Stored PasswordHash: {user.PasswordHash}");
+        Console.WriteLine($"Attempting to verify password: {request.Password}");
+        Console.WriteLine($"Verification result: {result}");
         
         if(result == PasswordVerificationResult.Failed)
         {
@@ -60,8 +68,37 @@ public class AuthController : ControllerBase
         }
         else
         {
-            var token = "success";
+            var token = GenerateToken(user);
             return Ok(token);
         }
     }
+
+    [HttpGet("token")]
+    public ActionResult<string> GetToken()
+    {
+        var user = context.Users.FirstOrDefault(u => u.Email == "test@test.com");
+        return GenerateToken(user!);
+    }                                   
+    
+    private string GenerateToken(User user) {
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, user.Name),
+        };
+        
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+        var token = new JwtSecurityToken(
+            issuer: configuration.GetValue<string>("AppSettings:Issuer"),
+            audience: configuration.GetValue<string>("AppSettings:Audience"),
+            claims: claims,
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: creds
+        );
+
+        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+        return jwt;
+    }
 }
+  
