@@ -24,13 +24,13 @@ public class AuthController(IAuthService authService) : BaseAPIController
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<string?>> Login(UserDto request)
+    public async Task<ActionResult<TokenResponseDto>> Login(UserDto request)
     {
-        var token = await authService.LoginAsync(request);
+        var response = await authService.LoginAsync(request);
 
-        if(token is null) return BadRequest("Invalid credentials");
+        if(response is null) return BadRequest("Invalid credentials");
 
-        return Ok(token);
+        return Ok(response);
     }
 
     [Authorize]
