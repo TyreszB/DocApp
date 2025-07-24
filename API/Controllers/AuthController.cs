@@ -1,8 +1,7 @@
 using Application.Users.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Identity;
-using Persistence;
+
 using Application.Services;
 using Microsoft.AspNetCore.Authorization;
 
@@ -47,6 +46,13 @@ public class AuthController(IAuthService authService) : BaseAPIController
         return Ok("Admin only");
     }
     
+    [HttpPost("refresh-token")]
+    public async Task<ActionResult<TokenResponseDto>> RefreshToken(RefreshTokenRequestDTO request)
+    {
+        var response = await authService.RefreshTokenAsync(request);
+        if(response is null || response.AccessToken is null || response.RefreshToken is null) return Unauthorized("Invalid refresh token");
+        return Ok(response);
+    }
     
 }
   
