@@ -3,98 +3,50 @@ using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Persistence;
-using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.EntityFrameworkCore;    
+using Application.Services;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace API.Controllers;
 
-public class AuthController : BaseAPIController
+public class AuthController(IAuthService authService) : BaseAPIController
 {
-    private readonly AppDbContext context;
-    private readonly IConfiguration configuration;
-
-    public AuthController(AppDbContext context, IConfiguration configuration)
-    {
-        this.context = context;
-        this.configuration = configuration;
-    }
+    
     
     [HttpPost("register")]
     public async Task<ActionResult<User>> Register(UserDto request)
     {
-        var user = new User
-        {
-            Name = request.Name,
-            Email = request.Email,
-            Password = request.Password,
-            PasswordHash = string.Empty,
-            Role = "User"
-        };
+        var user = await authService.RegisterAsync(request);
 
-        var passwordHash = new PasswordHasher<User>().HashPassword(user, request.Password);
-        user.PasswordHash = passwordHash;
-
-        context.Users.Add(user);
-        await context.SaveChangesAsync();
-
+        if(user is null) return BadRequest("User already exists");
+   
         return Ok(user);        
     }
 
     [HttpPost("login")]
-    public ActionResult<string> Login(UserDto request)
+    public async Task<ActionResult<string?>> Login(UserDto request)
     {
-        var user = context.Users.FirstOrDefault(u => u.Email == request.Email);
+        var token = await authService.LoginAsync(request);
 
-        if(user?.Email != request.Email)
-        {
-            return BadRequest("User not found");
-        }
+        if(token is null) return BadRequest("Invalid credentials");
 
-        var passwordHasher = new PasswordHasher<User>();
-        var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
-        
-      
-        
-        if(result == PasswordVerificationResult.Failed)
-        {
-            return BadRequest("Invalid password");
-        }
-        else
-        {
-            var token = GenerateToken(user);
-            return Ok(token);
-        }
+        return Ok(token);
     }
 
-    [HttpGet("token")]
-    public ActionResult<string> GetToken()
+    [Authorize]
+    [HttpGet]
+    public IActionResult Authenticated()
     {
-        var user = context.Users.FirstOrDefault(u => u.Email == "test@test.com");
-        return GenerateToken(user!);
-    }                                   
+        return Ok("Authenticated");
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpGet("admin-only")]
+    public IActionResult AdminOnly()
+    {
+        return Ok("Admin only");
+    }
     
-    private string GenerateToken(User user) {
-        var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.Name),
-        };
-        
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-        var token = new JwtSecurityToken(
-            issuer: configuration.GetValue<string>("AppSettings:Issuer"),
-            audience: configuration.GetValue<string>("AppSettings:Audience"),
-            claims: claims,
-            expires: DateTime.Now.AddDays(1),
-            signingCredentials: creds
-        );
-
-        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-        return jwt;
-    }
+    
 }
   

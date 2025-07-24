@@ -5,6 +5,10 @@ using Persistence;
 using Application.Core;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Application.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +31,23 @@ builder.Services.AddCors();
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);   
 
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = builder.Configuration["AppSettings:Issuer"],
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["AppSettings:Audience"],
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Token"]!))
+    };
+  
+});
 
 var app = builder.Build();
 
