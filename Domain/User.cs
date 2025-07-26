@@ -12,8 +12,10 @@ public class User
     public required string Role { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-    public bool IsEmailVerified { get; set; } = false;
-    public bool IsPhoneVerified { get; set; } = false;
+
+    public string? RefreshToken { get; set; }
+    public DateTime RefreshTokenExpiry { get; set; } = DateTime.UtcNow;
+ 
     public bool IsActive { get; set; } = true;
     public bool IsArchived { get; set; } = false;
     public bool IsLocked { get; set; } = false;

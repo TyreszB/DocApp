@@ -1,12 +1,18 @@
-using Application.Services;
+
 using Application.Users.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Identity;
 using Persistence;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
+using System.Security.Cryptography;
 
 namespace Application.Services;
 
-public class AuthService(AppDbContext context) : IAuthService
+public class AuthService(AppDbContext context, IConfiguration configuration) : IAuthService
 {
     public async Task<User?> RegisterAsync(UserDto request)
     {
@@ -33,13 +39,13 @@ public class AuthService(AppDbContext context) : IAuthService
         return user;
     }
 
-    public async Task<string?> LoginAsync(UserDto request)
+    public async Task<TokenResponseDto?> LoginAsync(UserDto request)
     {
-        if(context.Users.Any(u => u.Email != request.Email)) return null;
-
-        var user = context.Users.FirstOrDefault(u => u.Email == request.Email)
-        ;
+        var user = context.Users.FirstOrDefault(u => u.Email == request.Email);
+        if(user is null) return null;
+        
         var passwordHasher = new PasswordHasher<User>();
+
         var result = passwordHasher.VerifyHashedPassword(user!, user!.PasswordHash, request.Password);
         
       
@@ -50,18 +56,78 @@ public class AuthService(AppDbContext context) : IAuthService
         }
         else
         {
-            var token = GenerateToken(user);
-            return token;
+            var response = new TokenResponseDto
+            {
+                AccessToken = CreateToken(user),
+                RefreshToken = await GenerateAndSaveRefreshToken(user)
+            };
+            return response; 
         }
     }
 
-    public string GenerateToken(User user)
+    public async Task<TokenResponseDto?> RefreshTokenAsync(RefreshTokenRequestDTO request)
     {
-        throw new NotImplementedException();
+        var user = await ValidateRefreshTokenAsync(request.UserId, request.RefreshToken);
+        if(user is null) return null;
+        var response = new TokenResponseDto
+        {
+            AccessToken = CreateToken(user),
+            RefreshToken = await GenerateAndSaveRefreshToken(user)
+        };
+        return response;
     }
 
-    public bool VerifyPassword(User user, string password)
+    private async Task<User?> ValidateRefreshTokenAsync(Guid userId, string refreshToken)
     {
-        throw new NotImplementedException();
+         var user = await context.Users.FindAsync(userId);
+        if(user is null || user.RefreshToken != refreshToken || user.RefreshTokenExpiry <= DateTime.UtcNow)
+        {
+            return null;
+        }
+
+        return user;
     }
+
+
+    private string CreateRefreshToken() 
+    {
+        var randomNumber = new byte[32];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomNumber);
+        return Convert.ToBase64String(randomNumber);
+    }
+
+    private async Task<string> GenerateAndSaveRefreshToken(User user) {
+        var refreshToken = CreateRefreshToken();
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpiry = DateTime.UtcNow.AddDays(1);
+        await context.SaveChangesAsync();
+        return refreshToken;
+       
+    }
+
+    private string CreateToken(User user) {
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Role, user.Role)
+        };
+        
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["AppSettings:Token"]!));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+        var token = new JwtSecurityToken(
+            issuer: configuration["AppSettings:Issuer"],
+            audience: configuration["AppSettings:Audience"],
+            claims: claims,
+            expires: DateTime.Now.AddDays(1),
+            signingCredentials: creds
+        );
+
+        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+        return jwt;
+    }
+
+
 }
