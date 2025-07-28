@@ -39,7 +39,7 @@ public class AuthService(AppDbContext context, IConfiguration configuration) : I
         return user;
     }
 
-    public async Task<TokenResponseDto?> LoginAsync(UserDto request)
+    public async Task<TokenResponseDto?> LoginAsync(LoginDto request)
     {
         var user = context.Users.FirstOrDefault(u => u.Email == request.Email);
         if(user is null) return null;

@@ -23,7 +23,7 @@ public class AuthController(IAuthService authService) : BaseAPIController
     }
 
     [HttpPost("login")]
-    public async Task<ActionResult<TokenResponseDto>> Login(UserDto request)
+    public async Task<ActionResult<TokenResponseDto>> Login(LoginDto request)
     {
         var response = await authService.LoginAsync(request);
 
