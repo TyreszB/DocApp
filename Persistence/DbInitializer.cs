@@ -1,5 +1,6 @@
 using System;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence;
 
@@ -9,26 +10,27 @@ public class DbInitializer
     {
         if(context.Users.Any()) return;
 
-        var users = new List<User>
+        var passwordHasher = new PasswordHasher<User>();
+        var user = new User
         {
-            new User
-            {
-                Name = "Bob",
-                Email = "bob@test.com",
-                Password = "password",
-                Role = "Admin",
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                RefreshToken = string.Empty,
-                RefreshTokenExpiry = DateTime.UtcNow.AddDays(1),
-                IsActive = true,
-                IsArchived = false,
-                IsLocked = false,
-                IsVerified = true,
-            }
+            Name = "Bob",
+            Email = "bob@test.com",
+            Password = "password",
+            Role = "Admin",
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            RefreshToken = string.Empty,
+            RefreshTokenExpiry = DateTime.UtcNow.AddDays(1),
+            IsActive = true,
+            IsArchived = false,
+            IsLocked = false,
+            IsVerified = true,
         };
 
-        context.Users.AddRange(users);
+        // Hash the password
+        user.PasswordHash = passwordHasher.HashPassword(user, user.Password);
+
+        context.Users.Add(user);
         await context.SaveChangesAsync();
 
         // Seed Aircrafts

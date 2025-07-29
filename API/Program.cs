@@ -9,6 +9,8 @@ using Application.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +52,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 var app = builder.Build();
+
+// Update existing user's password hash if needed
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var passwordHasher = new PasswordHasher<User>();
+    
+    var existingUser = context.Users.FirstOrDefault(u => u.Email == "bob@test.com");
+    if (existingUser != null && string.IsNullOrEmpty(existingUser.PasswordHash))
+    {
+        existingUser.PasswordHash = passwordHasher.HashPassword(existingUser, existingUser.Password);
+        context.SaveChanges();
+    }
+}
 
 if(app.Environment.IsDevelopment()){
     app.MapOpenApi();

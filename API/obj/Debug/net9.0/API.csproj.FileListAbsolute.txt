@@ -177,3 +177,4 @@
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.dll
 /Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/tyreszdev/IdeaProjects/DocApp/API/bin/Debug/net9.0/System.Security.Permissions.dll

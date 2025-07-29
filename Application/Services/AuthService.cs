@@ -42,13 +42,11 @@ public class AuthService(AppDbContext context, IConfiguration configuration) : I
     public async Task<TokenResponseDto?> LoginAsync(LoginDto request)
     {
         var user = context.Users.FirstOrDefault(u => u.Email == request.Email);
-        if(user is null) return null;
+        if(user is null || string.IsNullOrEmpty(user.PasswordHash)) return null;
         
         var passwordHasher = new PasswordHasher<User>();
 
-        var result = passwordHasher.VerifyHashedPassword(user!, user!.PasswordHash, request.Password);
-        
-      
+        var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
         
         if(result == PasswordVerificationResult.Failed)
         {

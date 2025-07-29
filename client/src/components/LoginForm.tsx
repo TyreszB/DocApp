@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 interface LoginFormData {
-  name: string;
   email: string;
   password: string;
 }
@@ -14,7 +13,6 @@ interface LoginFormProps {
 
 const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps) => {
   const [formData, setFormData] = useState<LoginFormData>({
-    name: '',
     email: '',
     password: ''
   });
@@ -34,18 +32,6 @@ const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps
 
   return (
       <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          required
-          disabled={isLoading}
-        />
-      </div>
       <div className="form-group">
         <label htmlFor="email">Email:</label>
         <input
