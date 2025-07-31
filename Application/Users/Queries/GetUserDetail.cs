@@ -2,6 +2,7 @@ using System;
 using Domain;
 using MediatR;
 using Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Queries;
 
@@ -15,8 +16,12 @@ public class GetUserDetail
     {
         public async Task<User> Handle(Query request, CancellationToken cancellationToken)
         {
-            return await context.Users.FindAsync([request.Id], cancellationToken)
-                ?? throw new Exception("User not found");
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == request.Id, cancellationToken);
+            
+            if (user == null)
+                throw new Exception("User not found");
+                
+            return user;
         }
     }
 }

@@ -56,6 +56,7 @@ public class AuthService(AppDbContext context, IConfiguration configuration) : I
         {
             var response = new TokenResponseDto
             {
+                UserId = user.Id,
                 AccessToken = CreateToken(user),
                 RefreshToken = await GenerateAndSaveRefreshToken(user)
             };
@@ -69,6 +70,7 @@ public class AuthService(AppDbContext context, IConfiguration configuration) : I
         if(user is null) return null;
         var response = new TokenResponseDto
         {
+            UserId = user.Id,
             AccessToken = CreateToken(user),
             RefreshToken = await GenerateAndSaveRefreshToken(user)
         };
