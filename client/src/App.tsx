@@ -8,17 +8,21 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if(token) {
+    const userId = localStorage.getItem('userId');
+    
+    if(token && userId) {
       axios.get<User>('https://localhost:5001/api/auth/', {
         headers: {
           Authorization: `Bearer ${token}`
         }
-      }).then((response) => {
-        setUser(response.data);
+      }).then( async () => {
+        const user = await axios.get<User>(`https://localhost:5001/api/user/${userId}`);
+        setUser(user.data);
+        console.log(user.data);
       }).catch((error) => {
         console.error('Error fetching user:', error);
-        // If token is invalid, remove it
         localStorage.removeItem('token');
+        localStorage.removeItem('userId');
         setUser(null);
       });
     }
@@ -26,6 +30,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
     setUser(null);
   };
 
@@ -33,7 +38,6 @@ function App() {
     <>
       {user ? (
         <div>
-          <h1>Aircraft Doc App</h1>
           <p>Welcome, {user.name}!</p>
           <button onClick={handleLogout}>Logout</button>
         </div>

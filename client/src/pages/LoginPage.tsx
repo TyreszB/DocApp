@@ -7,6 +7,12 @@ interface LoginFormData {
   password: string;
 }
 
+interface LoginResponse {
+  userId: string;
+  token: string;
+  refreshToken: string;
+}
+
 const LoginPage = () => {
 
   const [isLoading, setIsLoading] = useState(false);
@@ -16,11 +22,12 @@ const LoginPage = () => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await axios.post('https://localhost:5001/api/auth/login', data);
+      const response = await axios.post<LoginResponse>('https://localhost:5001/api/auth/login', data);
       console.log('Login successful:', response.data);
       
-      // Store the token in localStorage
+      // Store the token and user ID in localStorage
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('userId', response.data.userId);
       
       // Reload the page to trigger the authentication check
       window.location.reload();
