@@ -16,9 +16,8 @@ function App() {
           Authorization: `Bearer ${token}`
         }
       }).then( async () => {
-        const user = await axios.get<User>(`https://localhost:5001/api/user/${userId}`);
+        const user = await axios.get<User>(`https://localhost:5001/api/users/${userId}`);
         setUser(user.data);
-        console.log(user.data);
       }).catch((error) => {
         console.error('Error fetching user:', error);
         localStorage.removeItem('token');
