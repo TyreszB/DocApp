@@ -1,8 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+}
+
+.navbar + * {
+  margin-top: 80px; /* Adjust based on your NavBar height */
 }
 
 .logo {

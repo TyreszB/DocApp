@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import LoginPage from './pages/LoginPage';
+import NavBar from './components/NavBar';
 
 function App() {
 
@@ -35,14 +36,17 @@ function App() {
 
   return (
     <>
-      {user ? (
-        <div>
-          <p>Welcome, {user.name}!</p>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
-      ) : (
-        <LoginPage />
-      )}
+      <NavBar />
+      <div className="container mx-full px-4 pt-20 flex justify-center items-center h-screen w-screen">
+        {user ? (
+          <div>
+            <p>Welcome, {user.name}!</p>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        ) : (
+          <LoginPage />
+        )}
+      </div>
     </>
   )
 }
