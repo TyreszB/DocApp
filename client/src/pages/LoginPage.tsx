@@ -23,13 +23,10 @@ const LoginPage = () => {
       setIsLoading(true);
       setError(null);
       const response = await axios.post<LoginResponse>('https://localhost:5001/api/auth/login', data);
-      console.log('Login successful:', response.data);
       
-      // Store the token and user ID in localStorage
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.userId);
       
-      // Reload the page to trigger the authentication check
       window.location.reload();
     } catch (error) {
       console.error('Login failed:', error);
