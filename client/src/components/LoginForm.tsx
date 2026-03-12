@@ -31,8 +31,8 @@ const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps
   };
 
   return (
-      <form onSubmit={handleSubmit}>
-      <div className="form-group">
+      <form onSubmit={handleSubmit} className="w-full max-w-sm mx-auto">
+      <div className="form-group flex flex-col gap-1 mb-4">
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -42,9 +42,10 @@ const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps
           onChange={handleInputChange}
           required
           disabled={isLoading}
+          className="w-full px-3 py-2 border rounded"
         />
       </div>
-      <div className="form-group">
+      <div className="form-group flex flex-col gap-1 mb-4">
         <label htmlFor="password">Password:</label>
         <input
           type="password"
@@ -54,12 +55,13 @@ const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps
           onChange={handleInputChange}
           required
           disabled={isLoading}
+          className="w-full px-3 py-2 border rounded"
         />
       </div>
-      <button type="submit" disabled={isLoading}>
+      <button type="submit" disabled={isLoading} className="w-full py-2 px-4 rounded font-medium">
         {isLoading ? 'Logging in...' : 'Login'}
       </button>
-      {error && <p className="error">{error}</p>}
+      {error && <p className="error mt-2 text-red-600 text-sm">{error}</p>}
     </form>
   );
 };

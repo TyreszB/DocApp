@@ -35,9 +35,12 @@ function App() {
   };
 
   return (
-    <>
+    <div className="flex items-center justify-center">
       <NavBar />
-      <div className="container mx-full px-4 pt-20 flex justify-center items-center h-screen w-screen">
+      <main
+        className="h-screen w-full flex justify-center items-center px-4"
+        style={{ minHeight: 'calc(100vh - 4rem)' }}
+      >
         {user ? (
           <div>
             <p>Welcome, {user.name}!</p>
@@ -46,8 +49,8 @@ function App() {
         ) : (
           <LoginPage />
         )}
-      </div>
-    </>
+      </main>
+    </div>
   )
 }
 

@@ -37,7 +37,9 @@ const LoginPage = () => {
   };
 
   return (
-    <LoginForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
+    <div className="w-full max-w-md flex justify-center items-center">
+      <LoginForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
+    </div>
   );
 };
 
