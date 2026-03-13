@@ -35,7 +35,7 @@ function App() {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <>
       <NavBar />
       <main
         className="h-screen w-full flex justify-center items-center px-4"
@@ -50,7 +50,7 @@ function App() {
           <LoginPage />
         )}
       </main>
-    </div>
+    </>
   )
 }
 
