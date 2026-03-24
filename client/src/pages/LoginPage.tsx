@@ -35,6 +35,9 @@ const LoginPage = () => {
       setIsLoading(false);
     }
   };
+  //added a comment
+  //added a comment
+  //added a comment
 
   return (
     <div className="w-full max-w-md flex justify-center items-center">
