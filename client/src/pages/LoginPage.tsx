@@ -37,7 +37,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full max-w-md flex justify-center items-center">
+    <div className="w-full max-w-md flex justify-center items-center ">
+      <div className="bg-background text-on-background font-body min-h-screen flex flex-col items-center justify-center relative overflow-hidden"></div>
       <LoginForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
     </div>
   );
