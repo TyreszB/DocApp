@@ -38,8 +38,11 @@ const LoginPage = () => {
 
   return (
     <div className="w-full max-w-md flex justify-center items-center ">
-      <div className="bg-background text-on-background font-body min-h-screen flex flex-col items-center justify-center relative overflow-hidden"></div>
-      <LoginForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
+      <div className="bg-background text-on-background font-body min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
+      <div className="bg-[#141e12]/60 backdrop-blur-xl rounded-xl p-8 border border-[#3b4b37]/30 relative shadow-[0_0_50px_-12px_rgba(0,255,65,0.1)]">
+        <LoginForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
+      </div>
+      </div>
     </div>
   );
 };
