@@ -33,7 +33,7 @@ const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps
   return (
       <form onSubmit={handleSubmit} className="w-full max-w-sm mx-auto">
       <div className="form-group flex flex-col gap-1 mb-4">
-        <label htmlFor="email">Email:</label>
+        <label htmlFor="email">Email: </label>
         <input
           type="email"
           id="email"
@@ -46,7 +46,7 @@ const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps
         />
       </div>
       <div className="form-group flex flex-col gap-1 mb-4">
-        <label htmlFor="password">Password:</label>
+        <label htmlFor="password">Password: </label>
         <input
           type="password"
           id="password"
