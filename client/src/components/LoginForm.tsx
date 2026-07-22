@@ -45,7 +45,7 @@ const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps
           className="w-full px-3 py-2 border rounded"
         />
       </div>
-      <div className="form-group flex flex-col gap-1 mb-4">
+      <div className="form-group flex flex-col gap-1 mb-4 text-[10px] font-bold text-[#b9ccb2] tracking-widest uppercase px-1">
         <label htmlFor="password">Password: </label>
         <input
           type="password"
@@ -58,7 +58,7 @@ const LoginForm = ({ onSubmit, isLoading = false, error = null }: LoginFormProps
           className="w-full px-3 py-2 border rounded"
         />
       </div>
-      <button type="submit" disabled={isLoading} className="w-full py-2 px-4 rounded font-medium">
+      <button type="submit" disabled={isLoading} className="w-full py-2 rounded block text-[10px] font-bold text-[#b9ccb2] tracking-widest uppercase px-1">
         {isLoading ? 'Logging in...' : 'Login'}
       </button>
       {error && <p className="error mt-2 text-red-600 text-sm">{error}</p>}
