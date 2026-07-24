@@ -14,22 +14,24 @@ interface LoginResponse {
 }
 
 const LoginPage = () => {
-
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = async (data: LoginFormData) => {
-   
     try {
       setIsLoading(true);
       setError(null);
-      const response = await axios.post<LoginResponse>('https://localhost:5001/api/auth/login', data);
-      
+      const response = await axios.post<LoginResponse>(
+        'https://localhost:5001/api/auth/login',
+        data
+      );
+
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.userId);
-      
+
       window.location.reload();
-    } catch (error) {
-      console.error('Login failed:', error);
+    } catch (err) {
+      console.error('Login failed:', err);
       setError('Invalid email or password');
     } finally {
       setIsLoading(false);
@@ -37,14 +39,21 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="w-full max-w-md flex justify-center items-center ">
-      <div className="bg-background text-on-background font-body min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-      <div className="bg-[#141e12]/60 backdrop-blur-xl rounded-xl p-8 border border-[#3b4b37]/30 relative shadow-[0_0_50px_-12px_rgba(0,255,65,0.1)]">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center px-4 bg-[#050805]">
+      <div className="w-full max-w-sm rounded-xl border border-[#00ff41]/40 bg-[#0a120c]/90 p-8 shadow-[0_0_40px_-16px_rgba(0,255,65,0.25)]">
+        <div className="mb-8 text-center">
+          <h1 className="text-2xl font-bold tracking-[0.2em] text-[#00ff41] uppercase">
+            DocApp
+          </h1>
+          <p className="mt-2 text-[10px] tracking-widest uppercase text-[#6b8a64]">
+            Systems operational
+          </p>
+        </div>
+
         <LoginForm onSubmit={handleSubmit} isLoading={isLoading} error={error} />
-      </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage; 
+export default LoginPage;

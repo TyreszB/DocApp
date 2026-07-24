@@ -34,24 +34,26 @@ function App() {
     setUser(null);
   };
 
+  if (!user) {
+    return <LoginPage />;
+  }
+
   return (
-    <>
+    <div className="min-h-screen w-full flex flex-col bg-[#050805]">
       <NavBar />
-      <main
-        className="h-screen w-full flex justify-center items-center px-4"
-        style={{ minHeight: 'calc(100vh - 4rem)' }}
-      >
-        {user ? (
-          <div>
-            <p>Welcome, {user.name}!</p>
-            <button onClick={handleLogout}>Logout</button>
-          </div>
-        ) : (
-          <LoginPage />
-        )}
+      <main className="flex-1 w-full flex justify-center items-center px-4">
+        <div className="text-center">
+          <p className="text-[#b9ccb2]">Welcome, {user.name}!</p>
+          <button
+            onClick={handleLogout}
+            className="mt-4 rounded-md border border-[#00ff41]/40 px-4 py-2 text-xs font-bold tracking-widest uppercase text-[#00ff41]"
+          >
+            Logout
+          </button>
+        </div>
       </main>
-    </>
-  )
+    </div>
+  );
 }
 
 export default App
